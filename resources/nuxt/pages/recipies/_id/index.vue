@@ -4,7 +4,9 @@
             <img :src="'/images/' + recipe.img" alt="" />
         </div>
         <div class="title">
-            <h1 class="bg-text">{{ recipe.title.split(" ")[0] }}</h1>
+            <h1 class="bg-text" v-if="recipe.title">
+                {{ recipe.title.split(" ")[0] }}
+            </h1>
             <h1 class="title-text">{{ recipe.title }}</h1>
         </div>
         <p class="text lead" v-html="recipe.text"></p>
@@ -78,28 +80,29 @@
 </template>
 
 <script>
+import axios from "axios";
 export default {
-    data() {
-        return {
-            recipes: ""
-        };
-    },
-    created() {
-        let uri = "/api/ahmadraosanawarali/recipes";
-        axios.get(uri).then(response => {
-            // console.log(response.data);
+    // data() {
+    //     return {
+    //         recipe: ""
+    //     };
+    // },
+    // created() {
+    //     let uri = "/api/ahmadraosanawarali/recipe/" + this.$route.params.id;
+    //     axios.get(uri).then(response => {
+    //         // console.log(response.data);
 
-            this.recipes = response.data;
-        });
-    },
+    //         this.recipe = response.data;
+    //     });
+    // },
 
     asyncData(context) {
         return new Promise((resolve, reject) => {
-            // setTimeout(()=>{
             resolve({
-                recipe: this.recipes.find(el => el.id == context.params.id)
+                recipe: axios
+                    .get("/api/ahmadraosanawarali/recipe/" + context.params.id)
+                    .then(response => response.data)
             });
-            // }, 1500)
         });
     }
 };

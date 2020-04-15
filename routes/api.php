@@ -22,4 +22,5 @@ Route::group([
 ], function ($router) {
 
     Route::get('ahmadraosanawarali/recipes', 'RecipeController@recipes');
+    // Route::get('ahmadraosanawarali/recipe/{id}', 'RecipeController@recipe');
 });

@@ -15,6 +15,8 @@
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/api/ahmadraosanawarali/recipe/{id}', 'RecipeController@recipe');
+
 Route::group(['middleware' => 'auth'], function () {
     Route::get('/admin', 'AdminController@index');
     Route::resource('/admin/recipes', 'RecipeController');

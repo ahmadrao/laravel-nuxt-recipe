@@ -139,6 +139,7 @@ class RecipeController extends Controller
 
     public function recipe($id)
     {
-        return Recipe::findOrFail($id);
+        $recipe = Recipe::findOrFail($id);
+        return $recipe;
     }
 }
